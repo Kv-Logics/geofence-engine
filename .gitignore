@@ -1,0 +1,28 @@
+# Large model files
+*.onnx
+*.pth
+*.pkl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Large raw data (keep processed outputs)
+coords_extracted/raw_osm.json
+coords_extracted/raw_osm_v2.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temp
+*.log
+*.tmp

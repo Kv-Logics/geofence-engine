@@ -1,0 +1,1116 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3632292798,
+        "amenity": "school",
+        "name": "REC Middle School"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.822985,
+          10.7634416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3664464702,
+        "amenity": "cafe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8133192,
+          10.765129
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3676415674,
+        "amenity": "bicycle_parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8178484,
+          10.7663002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3676415675,
+        "amenity": "bicycle_parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8179973,
+          10.7663062
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3676415676,
+        "amenity": "bicycle_parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8178453,
+          10.7663952
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3676415677,
+        "amenity": "bicycle_parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8179942,
+          10.7664042
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3677098153,
+        "amenity": "bank",
+        "branch": "(SME Branch)",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "brand:wikipedia": "en:State Bank of India",
+        "name": "State Bank of India",
+        "operator": "State Bank of India",
+        "short_name": "SBI"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8105805,
+          10.7577127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3678256761,
+        "amenity": "bicycle_parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8163906,
+          10.766299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3686857444,
+        "amenity": "restaurant",
+        "cuisine": "asian",
+        "name": "Motel Bamboos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8120678,
+          10.7565581
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3686857449,
+        "amenity": "restaurant",
+        "cuisine": "asian",
+        "name": "Students Corner Restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.812834,
+          10.7561876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3699857490,
+        "amenity": "atm",
+        "brand": "Canara Bank",
+        "brand:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "brand:ur": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "brand:wikidata": "Q2003777",
+        "brand:wikipedia": "en:Canara Bank",
+        "brand:wikipedia:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "name": "Canara Bank",
+        "name:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "name:ur": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "operator": "Canara Bank",
+        "operator:wikidata": "Q2003777"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8159066,
+          10.7559371
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3702177341,
+        "amenity": "place_of_worship",
+        "religion": "hindu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8240291,
+          10.7680326
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3708840804,
+        "amenity": "place_of_worship",
+        "name": "Ponmuthu Mariamman Alayam",
+        "religion": "hindu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8218354,
+          10.7738593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3708840947,
+        "amenity": "place_of_worship",
+        "name": "small shrine",
+        "religion": "hindu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8226681,
+          10.7726126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3730057429,
+        "amenity": "place_of_worship",
+        "religion": "hindu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8044786,
+          10.7528154
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 3844080589,
+        "amenity": "school"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8120889,
+          10.7710248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 4772978039,
+        "amenity": "university",
+        "name": "Jasper hostel NIT Trichy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8183653,
+          10.769399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 4934871425,
+        "amenity": "food_court",
+        "name": "Sabari mess -kerala food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8175393,
+          10.7679682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 7252225680,
+        "addr:district": "Tiruchirappalli",
+        "addr:full": "Government Hospital Thiruverambur, Near Police Station, Thuvakudi, Near Bharagath Nagar",
+        "addr:postcode": "620015",
+        "addr:state": "Tamil Nadu",
+        "addr:subdistrict": "Thiruverumbur",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Thuvakudi,Government Hospital",
+        "source": "OpenGovernmentData"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.821829,
+          10.75343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 7846487922,
+        "addr:district": "Tiruchirappalli",
+        "addr:postcode": "620022",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Sukriti Hospital",
+        "source": "Local Knowledge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8049737,
+          10.7731455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 7973358298,
+        "amenity": "police",
+        "branch": "Thuvakudi",
+        "name": "Police station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8228808,
+          10.7526081
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 8463403139,
+        "amenity": "place_of_worship",
+        "name": "NITT Mosque",
+        "religion": "muslim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8184765,
+          10.7653482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 100857261,
+        "addr:city": "Tiruchirapalli",
+        "addr:country": "IN",
+        "addr:housename": "National Institute of Technology",
+        "addr:postcode": "620015",
+        "addr:street": "13th Street",
+        "alt_name": "NIT Tiruchirappalli;NIT Trichy;National Institute of Technology Tiruchirappalli",
+        "amenity": "university",
+        "name": "National Institute of Technology Trichy",
+        "name:ar": "\u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0648\u0637\u0646\u064a \u0644\u0644\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u062a\u0631\u064a\u0634\u064a",
+        "name:hi": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u0940\u092f \u092a\u094d\u0930\u094c\u0926\u094d\u092f\u094b\u0917\u093f\u0915\u0940 \u0938\u0902\u0938\u094d\u0925\u093e\u0928, \u0924\u094d\u0930\u093f\u091a\u0940",
+        "name:ml": "\u0d28\u0d3e\u0d37\u0d23\u0d7d \u0d07\u0d7b\u0d38\u0d4d\u0d31\u0d4d\u0d31\u0d3f\u0d31\u0d4d\u0d31\u0d4d\u0d2f\u0d42\u0d1f\u0d4d\u0d1f\u0d4d \u0d13\u0d2b\u0d4d \u0d1f\u0d46\u0d15\u0d4d\u0d28\u0d4b\u0d33\u0d1c\u0d3f, \u0d1f\u0d4d\u0d30\u0d3f\u0d1a\u0d4d\u0d1a\u0d3f",
+        "name:mr": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u0940\u092f \u0924\u0902\u0924\u094d\u0930\u091c\u094d\u091e\u093e\u0928 \u0938\u0902\u0938\u094d\u0925\u093e, \u0924\u093f\u0930\u0941\u091a\u093f\u0930\u093e\u092a\u0932\u094d\u0932\u0940",
+        "name:ta": "\u0ba4\u0bc7\u0b9a\u0bbf\u0baf \u0ba4\u0bca\u0bb4\u0bbf\u0bb2\u0bcd\u0ba8\u0bc1\u0b9f\u0bcd\u0baa\u0b95\u0bcd \u0b95\u0bb4\u0b95\u0bae\u0bcd, \u0ba4\u0bbf\u0bb0\u0bc1\u0b9a\u0bcd\u0b9a\u0bbf",
+        "short_name": "NITT",
+        "website": "https://www.nitt.edu/",
+        "wikidata": "Q3521821",
+        "wikipedia": "en:National Institute of Technology, Tiruchirappalli"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8053598,
+              10.763666
+            ],
+            [
+              78.807347,
+              10.7612979
+            ],
+            [
+              78.8086388,
+              10.7600133
+            ],
+            [
+              78.810064,
+              10.7589581
+            ],
+            [
+              78.8112225,
+              10.7580787
+            ],
+            [
+              78.8119629,
+              10.7575679
+            ],
+            [
+              78.8127349,
+              10.7571655
+            ],
+            [
+              78.813229,
+              10.7568727
+            ],
+            [
+              78.8156994,
+              10.7555905
+            ],
+            [
+              78.8173996,
+              10.7547261
+            ],
+            [
+              78.818868,
+              10.7540632
+            ],
+            [
+              78.8260312,
+              10.751714
+            ],
+            [
+              78.8266969,
+              10.7559094
+            ],
+            [
+              78.8246711,
+              10.7629959
+            ],
+            [
+              78.824613,
+              10.7631047
+            ],
+            [
+              78.8222254,
+              10.7675741
+            ],
+            [
+              78.8204561,
+              10.7729137
+            ],
+            [
+              78.8179952,
+              10.7731079
+            ],
+            [
+              78.8169095,
+              10.7749224
+            ],
+            [
+              78.81675,
+              10.7749328
+            ],
+            [
+              78.8138687,
+              10.7751656
+            ],
+            [
+              78.8123159,
+              10.7701651
+            ],
+            [
+              78.8122892,
+              10.7686944
+            ],
+            [
+              78.8118212,
+              10.7687813
+            ],
+            [
+              78.8114457,
+              10.7689078
+            ],
+            [
+              78.8114457,
+              10.7686654
+            ],
+            [
+              78.8113062,
+              10.7684862
+            ],
+            [
+              78.8117032,
+              10.767896
+            ],
+            [
+              78.8119392,
+              10.7667155
+            ],
+            [
+              78.8084523,
+              10.7674164
+            ],
+            [
+              78.8083021,
+              10.7669316
+            ],
+            [
+              78.8076369,
+              10.7671529
+            ],
+            [
+              78.8073043,
+              10.7664256
+            ],
+            [
+              78.8066606,
+              10.76651
+            ],
+            [
+              78.8066392,
+              10.7663202
+            ],
+            [
+              78.8041608,
+              10.7643598
+            ],
+            [
+              78.8053598,
+              10.763666
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 360838522,
+        "amenity": "food_court",
+        "building": "yes",
+        "name": "Mega Mess II"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8121979,
+              10.7646059
+            ],
+            [
+              78.8122209,
+              10.7646306
+            ],
+            [
+              78.8121964,
+              10.7646525
+            ],
+            [
+              78.8122947,
+              10.7647583
+            ],
+            [
+              78.8123786,
+              10.764683
+            ],
+            [
+              78.8124752,
+              10.7647869
+            ],
+            [
+              78.8125835,
+              10.7646897
+            ],
+            [
+              78.8126044,
+              10.7647122
+            ],
+            [
+              78.8126557,
+              10.7646662
+            ],
+            [
+              78.8126079,
+              10.7646146
+            ],
+            [
+              78.8126204,
+              10.7646029
+            ],
+            [
+              78.812621,
+              10.7645644
+            ],
+            [
+              78.8126095,
+              10.7645499
+            ],
+            [
+              78.8126603,
+              10.764503
+            ],
+            [
+              78.8126187,
+              10.7644582
+            ],
+            [
+              78.8125944,
+              10.76448
+            ],
+            [
+              78.8124948,
+              10.7643728
+            ],
+            [
+              78.8123822,
+              10.7644738
+            ],
+            [
+              78.8123654,
+              10.7644556
+            ],
+            [
+              78.8121979,
+              10.7646059
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 427957461,
+        "addr:city": "Trichy",
+        "addr:postcode": "620022",
+        "alt_name": "GPT",
+        "alt_name:en": "GPT",
+        "alt_name_1": "Government Polytechnic",
+        "amenity": "college",
+        "name": "Government Polytechnic College",
+        "website": "https://www.gptctrichy.com/"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8040129,
+              10.7643804
+            ],
+            [
+              78.8049698,
+              10.7651185
+            ],
+            [
+              78.8065166,
+              10.7663356
+            ],
+            [
+              78.8065595,
+              10.7663694
+            ],
+            [
+              78.8065595,
+              10.7665791
+            ],
+            [
+              78.8072238,
+              10.7664704
+            ],
+            [
+              78.8075638,
+              10.7672551
+            ],
+            [
+              78.8082598,
+              10.7670453
+            ],
+            [
+              78.8084575,
+              10.7674882
+            ],
+            [
+              78.8118661,
+              10.7667501
+            ],
+            [
+              78.8116684,
+              10.7678378
+            ],
+            [
+              78.8112492,
+              10.7685059
+            ],
+            [
+              78.81136,
+              10.7686147
+            ],
+            [
+              78.8113916,
+              10.7689177
+            ],
+            [
+              78.811874,
+              10.7689333
+            ],
+            [
+              78.8118661,
+              10.7688245
+            ],
+            [
+              78.8121983,
+              10.7687002
+            ],
+            [
+              78.8123248,
+              10.7700909
+            ],
+            [
+              78.8120243,
+              10.7702074
+            ],
+            [
+              78.8120085,
+              10.7706969
+            ],
+            [
+              78.8117238,
+              10.7707357
+            ],
+            [
+              78.8114311,
+              10.7700365
+            ],
+            [
+              78.8106561,
+              10.7701297
+            ],
+            [
+              78.8106403,
+              10.7706114
+            ],
+            [
+              78.8105137,
+              10.7706347
+            ],
+            [
+              78.8101974,
+              10.7707047
+            ],
+            [
+              78.8099918,
+              10.7707746
+            ],
+            [
+              78.8098178,
+              10.770658
+            ],
+            [
+              78.8097703,
+              10.7708989
+            ],
+            [
+              78.8094382,
+              10.7707823
+            ],
+            [
+              78.809454,
+              10.7706037
+            ],
+            [
+              78.8089399,
+              10.7706192
+            ],
+            [
+              78.8087185,
+              10.7701064
+            ],
+            [
+              78.8094065,
+              10.7700054
+            ],
+            [
+              78.8090269,
+              10.7692052
+            ],
+            [
+              78.8079435,
+              10.7695393
+            ],
+            [
+              78.8080621,
+              10.7704327
+            ],
+            [
+              78.8071684,
+              10.7709067
+            ],
+            [
+              78.8059268,
+              10.7711164
+            ],
+            [
+              78.8050647,
+              10.7718934
+            ],
+            [
+              78.804179,
+              10.7716214
+            ],
+            [
+              78.8031588,
+              10.7718856
+            ],
+            [
+              78.8026605,
+              10.7707979
+            ],
+            [
+              78.8026842,
+              10.7705726
+            ],
+            [
+              78.8026131,
+              10.7701686
+            ],
+            [
+              78.8027871,
+              10.7698423
+            ],
+            [
+              78.8029373,
+              10.7691586
+            ],
+            [
+              78.8026131,
+              10.7687623
+            ],
+            [
+              78.8017985,
+              10.7681952
+            ],
+            [
+              78.8007466,
+              10.7674415
+            ],
+            [
+              78.8007941,
+              10.767325
+            ],
+            [
+              78.8011752,
+              10.7669972
+            ],
+            [
+              78.8015051,
+              10.766797
+            ],
+            [
+              78.801862,
+              10.7663536
+            ],
+            [
+              78.8040129,
+              10.7643804
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 453344306,
+        "access": "customers",
+        "amenity": "bicycle_parking",
+        "fee": "no",
+        "supervised": "no"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8184635,
+              10.7694577
+            ],
+            [
+              78.8184716,
+              10.7692719
+            ],
+            [
+              78.8186915,
+              10.7692825
+            ],
+            [
+              78.8186929,
+              10.7694695
+            ],
+            [
+              78.8184635,
+              10.7694577
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 453344307,
+        "access": "customers",
+        "amenity": "bicycle_parking",
+        "fee": "no",
+        "supervised": "no"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8186271,
+              10.7681725
+            ],
+            [
+              78.8186312,
+              10.7680236
+            ],
+            [
+              78.8189021,
+              10.7680407
+            ],
+            [
+              78.8188927,
+              10.7681896
+            ],
+            [
+              78.8186271,
+              10.7681725
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 453344308,
+        "access": "customers",
+        "amenity": "bicycle_parking",
+        "covered": "yes",
+        "fee": "no"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8186365,
+              10.7679274
+            ],
+            [
+              78.8188793,
+              10.767938
+            ],
+            [
+              78.8188887,
+              10.7677865
+            ],
+            [
+              78.8186459,
+              10.7677733
+            ],
+            [
+              78.8186365,
+              10.7679274
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 486022826,
+        "amenity": "food_court",
+        "name": "Andhra Mess"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8126461,
+              10.7678485
+            ],
+            [
+              78.8126406,
+              10.7679328
+            ],
+            [
+              78.812839,
+              10.7679368
+            ],
+            [
+              78.8128337,
+              10.7678538
+            ],
+            [
+              78.8128592,
+              10.7678486
+            ],
+            [
+              78.8128592,
+              10.7678274
+            ],
+            [
+              78.8128796,
+              10.7678169
+            ],
+            [
+              78.8128887,
+              10.7677879
+            ],
+            [
+              78.8128893,
+              10.7677586
+            ],
+            [
+              78.8128806,
+              10.7677365
+            ],
+            [
+              78.8128535,
+              10.7677308
+            ],
+            [
+              78.8128514,
+              10.7677189
+            ],
+            [
+              78.8128296,
+              10.7677207
+            ],
+            [
+              78.812823,
+              10.7676417
+            ],
+            [
+              78.8126607,
+              10.7676311
+            ],
+            [
+              78.8126566,
+              10.7676931
+            ],
+            [
+              78.8125347,
+              10.7676878
+            ],
+            [
+              78.8125346,
+              10.7678433
+            ],
+            [
+              78.8126461,
+              10.7678485
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 486024382,
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "regional",
+        "name": "Staff canteen"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8122556,
+              10.7594612
+            ],
+            [
+              78.8123511,
+              10.7594632
+            ],
+            [
+              78.8123552,
+              10.7592635
+            ],
+            [
+              78.8122597,
+              10.7592675
+            ],
+            [
+              78.8122556,
+              10.7594612
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

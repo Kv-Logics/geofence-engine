@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>NITT Campus Geofence Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#0d1117;color:#e2e8f0}
+    #app{display:flex;height:100vh}
+
+    /* ── LEFT SIDEBAR ─────────────────────────────── */
+    #sidebar{
+      width:280px;flex-shrink:0;
+      display:flex;flex-direction:column;
+      background:#0d1117;border-right:1px solid #1e2a3a;
+      z-index:500;
+    }
+
+    #sb-header{
+      padding:14px 16px 12px;
+      background:linear-gradient(135deg,#0f2342 0%,#0d1117 100%);
+      border-bottom:1px solid #1e2a3a;
+    }
+    #sb-header h1{font-size:.9rem;font-weight:700;color:#38bdf8;letter-spacing:.02em}
+    #sb-header p{font-size:.65rem;color:#475569;margin-top:2px}
+
+    /* stats row */
+    #stats{display:flex;border-bottom:1px solid #1e2a3a}
+    .st{flex:1;padding:8px 0;text-align:center;background:#0d1117}
+    .st:not(:last-child){border-right:1px solid #1e2a3a}
+    .st-v{font-size:1.1rem;font-weight:700;color:#38bdf8}
+    .st-l{font-size:.58rem;color:#475569;text-transform:uppercase;margin-top:1px}
+
+    /* toolbar */
+    #toolbar{display:flex;flex-wrap:wrap;gap:5px;padding:8px;border-bottom:1px solid #1e2a3a;background:#0d1117}
+    .tbtn{
+      flex:1;min-width:calc(50% - 3px);padding:7px 4px;
+      border:1px solid #1e2a3a;border-radius:7px;
+      background:#111827;color:#94a3b8;
+      font-size:.68rem;font-weight:600;cursor:pointer;
+      text-align:center;font-family:Inter,sans-serif;transition:all .15s;
+    }
+    .tbtn:hover{background:#1e293b;color:#e2e8f0;border-color:#334155}
+    .tbtn.on{background:#0f3460;border-color:#2563eb;color:#60a5fa}
+
+    /* search */
+    #search-wrap{padding:8px 8px 0}
+    #search{
+      width:100%;padding:7px 10px;
+      background:#111827;border:1px solid #1e2a3a;border-radius:8px;
+      color:#e2e8f0;font-size:.78rem;font-family:Inter,sans-serif;
+    }
+    #search:focus{outline:none;border-color:#38bdf8}
+    #search::placeholder{color:#374151}
+
+    /* building list */
+    #bld-list{flex:1;overflow-y:auto;padding:6px 6px 6px}
+    .bi{
+      display:flex;align-items:center;gap:8px;
+      padding:7px 8px;margin-bottom:3px;
+      background:#111827;border:1px solid #1e2a3a;border-radius:8px;
+      cursor:pointer;transition:all .12s;
+    }
+    .bi:hover{background:#1a2436;border-color:#334155}
+    .bi.sel{border-color:#38bdf8;background:#0c1f35}
+    .bi-num{
+      min-width:22px;height:22px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.65rem;font-weight:700;color:#fff;flex-shrink:0;
+    }
+    .bi-text{flex:1;min-width:0}
+    .bi-name{font-size:.75rem;font-weight:500;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .bi-sub{font-size:.6rem;color:#475569;margin-top:1px}
+
+    /* edit panel */
+    #ep{
+      border-top:1px solid #1e2a3a;background:#0a0f1a;
+      padding:10px 10px 12px;display:none;flex-shrink:0;
+    }
+    #ep.open{display:block}
+    #ep-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    #ep-head span{font-size:.7rem;font-weight:700;color:#64748b;text-transform:uppercase}
+    #ep-close{background:none;border:none;color:#475569;font-size:.9rem;cursor:pointer;padding:0}
+    .fl{margin-bottom:6px}
+    .fl label{display:block;font-size:.64rem;color:#475569;margin-bottom:2px}
+    .fl input,.fl select{
+      width:100%;padding:6px 9px;background:#111827;
+      border:1px solid #1e2a3a;border-radius:6px;
+      color:#e2e8f0;font-size:.75rem;font-family:Inter,sans-serif;
+    }
+    .fl input:focus,.fl select:focus{outline:none;border-color:#38bdf8}
+    .ea{display:flex;gap:5px;margin-top:8px}
+    .ebtn{flex:1;padding:7px;border:none;border-radius:6px;font-size:.7rem;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:.12s}
+    .e-save{background:#1d4ed8;color:#fff}.e-save:hover{background:#2563eb}
+    .e-del{background:#7f1d1d;color:#fca5a5}.e-del:hover{background:#991b1b}
+
+    /* ── MAP ─────────────────────────────────────── */
+    #map{flex:1;position:relative}
+
+    /* pip panel overlaid on map */
+    #pip-box{
+      position:absolute;top:12px;right:12px;z-index:1000;
+      background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+      border:1px solid #1e2a3a;border-radius:10px;
+      padding:12px 14px;width:230px;
+    }
+    #pip-box h4{font-size:.7rem;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:8px}
+    .pi{margin-bottom:6px}
+    .pi label{display:block;font-size:.62rem;color:#475569;margin-bottom:2px}
+    .pi input{
+      width:100%;padding:5px 8px;background:#111827;
+      border:1px solid #1e2a3a;border-radius:6px;
+      color:#e2e8f0;font-size:.73rem;font-family:Inter,sans-serif;
+    }
+    #pip-run{
+      width:100%;padding:7px;background:#0f766e;color:#fff;
+      border:none;border-radius:6px;font-size:.7rem;font-weight:700;
+      cursor:pointer;font-family:Inter,sans-serif;margin-top:2px;
+    }
+    #pip-run:hover{background:#0d9488}
+    #pip-res{margin-top:8px;padding:7px;border-radius:6px;font-size:.72rem;display:none}
+    #pip-res.hit{background:#14532d;border:1px solid #166534;color:#4ade80}
+    #pip-res.miss{background:#450a0a;border:1px solid #7f1d1d;color:#f87171}
+    #pip-tip{font-size:.6rem;color:#374151;margin-top:6px;text-align:center}
+
+    /* edit mode banner */
+    #em-bar{
+      position:absolute;top:12px;left:50%;transform:translateX(-50%);
+      background:#7c3aed;color:#fff;padding:5px 18px;
+      border-radius:20px;font-size:.72rem;font-weight:700;
+      z-index:2000;display:none;pointer-events:none;
+    }
+
+    /* toast */
+    #toast{
+      position:fixed;bottom:18px;left:calc(280px + 50%);transform:translateX(-50%);
+      background:rgba(30,41,59,.95);border:1px solid #334155;border-radius:8px;
+      padding:8px 16px;font-size:.75rem;color:#94a3b8;z-index:9999;
+      display:none;pointer-events:none;white-space:nowrap;
+      box-shadow:0 4px 20px rgba(0,0,0,.5);
+    }
+
+    /* leaflet popup */
+    .leaflet-popup-content-wrapper{background:#111827!important;border:1px solid #1e2a3a!important;border-radius:10px!important;color:#e2e8f0!important;box-shadow:0 8px 24px rgba(0,0,0,.6)!important}
+    .leaflet-popup-tip{background:#111827!important}
+    .pu-t{font-size:.88rem;font-weight:700;color:#38bdf8;margin-bottom:5px}
+    .pu-r{font-size:.68rem;color:#94a3b8;margin-bottom:2px}
+    .pu-r span{color:#e2e8f0}
+
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-thumb{background:#1e2a3a;border-radius:4px}
+  </style>
+</head>
+<body>
+<div id="app">
+
+<!-- LEFT SIDEBAR -->
+<div id="sidebar">
+  <div id="sb-header">
+    <h1>🏫 NITT Campus Map</h1>
+    <p>Geofence Engine · 306 Building Polygons</p>
+  </div>
+
+  <div id="stats">
+    <div class="st"><div class="st-v" id="s-tot">—</div><div class="st-l">Buildings</div></div>
+    <div class="st"><div class="st-v" id="s-nam">—</div><div class="st-l">Named</div></div>
+    <div class="st"><div class="st-v" id="s-ed">0</div><div class="st-l">Edits</div></div>
+  </div>
+
+  <div id="toolbar">
+    <button class="tbtn" id="t-draw" onclick="startDraw()">✏️ Add Polygon</button>
+    <button class="tbtn" id="t-edit" onclick="startEdit()">🔧 Edit Shape</button>
+    <button class="tbtn" id="t-done" onclick="finishEdit()" style="display:none;background:#14532d;color:#86efac;border-color:#166534">✓ Done</button>
+    <button class="tbtn" id="t-exp"  onclick="exportGeoJSON()">💾 Export</button>
+  </div>
+
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="🔍 Search building name..." oninput="filterList()"/>
+  </div>
+
+  <div id="bld-list"></div>
+
+  <!-- EDIT PANEL -->
+  <div id="ep">
+    <div id="ep-head">
+      <span>Edit Building</span>
+      <button id="ep-close" onclick="closeEP()">✕</button>
+    </div>
+    <div class="fl"><label>Name</label><input id="ep-name" placeholder="e.g. CSE Department"/></div>
+    <div class="fl"><label>Type</label>
+      <select id="ep-type">
+        <option value="university">University Block</option>
+        <option value="yes">General Building</option>
+        <option value="residential">Hostel</option>
+        <option value="library">Library</option>
+        <option value="auditorium">Auditorium</option>
+        <option value="office">Admin / Office</option>
+        <option value="sports_centre">Sports</option>
+        <option value="canteen">Canteen / Food</option>
+        <option value="laboratory">Laboratory</option>
+      </select>
+    </div>
+    <div class="fl"><label>Ref Code</label><input id="ep-ref" placeholder="e.g. CSE_BLOCK"/></div>
+    <div class="ea">
+      <button class="ebtn e-save" onclick="applyEdit()">Save</button>
+      <button class="ebtn e-del"  onclick="deleteSel()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="map">
+  <!-- PiP tester overlay -->
+  <div id="pip-box">
+    <h4>⚡ Geofence Test</h4>
+    <div class="pi"><label>Latitude</label><input id="pip-lat" placeholder="10.76200"/></div>
+    <div class="pi"><label>Longitude</label><input id="pip-lon" placeholder="78.81500"/></div>
+    <button id="pip-run" onclick="runPiP()">Test Point →</button>
+    <div id="pip-res"></div>
+    <div id="pip-tip">Click map to auto-fill coords</div>
+  </div>
+  <div id="em-bar">✏️ Drag vertices to reshape · Click Done when finished</div>
+</div>
+
+</div>
+<div id="toast"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script>
+// ══════════════════════════════════════════════════════
+// NITT CAMPUS BOUNDS — hard locked
+// ══════════════════════════════════════════════════════
+const NITT_BOUNDS = L.latLngBounds(
+  [10.7490, 78.8010],   // SW corner
+  [10.7780, 78.8300]    // NE corner
+);
+const NITT_CENTER = [10.7634, 78.8155];
+
+const map = L.map('map', {
+  zoomControl:   false,
+  maxBounds:     NITT_BOUNDS,
+  maxBoundsViscosity: 1.0,   // hard wall — cannot pan outside
+  minZoom:       15,          // cannot zoom out beyond campus
+  maxZoom:       20
+}).setView(NITT_CENTER, 17);
+
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+// Satellite base
+L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  { attribution:'Esri', maxZoom:20 }
+).addTo(map);
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+let buildings  = [];      // master array
+let selIdx     = null;    // selected index
+let edits      = 0;
+let testPin    = null;
+let editCtrl   = null;
+let editActive = false;
+
+const bldGroup = new L.FeatureGroup().addTo(map);
+const mrkGroup = new L.LayerGroup().addTo(map);
+
+// colour by source
+const SRC_COLOR = { osm:'#f97316', microsoft_ml:'#3b82f6', manual:'#10b981', new:'#10b981' };
+
+// ══════════════════════════════════════════════════════
+// LOAD
+// ══════════════════════════════════════════════════════
+async function load() {
+  // boundary ring
+  try {
+    const d = await (await fetch('coords_extracted/campus_boundary.geojson')).json();
+    L.geoJSON(d, { style:{ color:'#22d3ee', weight:2, fillOpacity:.04, dashArray:'6 3' } }).addTo(map);
+  } catch(e) {}
+
+  // roads
+  try {
+    const d = await (await fetch('coords_extracted/roads.geojson')).json();
+    L.geoJSON(d, { style:{ color:'#334155', weight:1.5, opacity:.7 } }).addTo(map);
+  } catch(e) {}
+
+  // buildings
+  let feats = [];
+  const urls = [
+    'coords_extracted/master_buildings.geojson',
+    'coords_extracted/buildings.geojson'
+  ];
+  for (const u of urls) {
+    try { feats = (await (await fetch(u)).json()).features; toast(`Loaded ${feats.length} buildings`); break; }
+    catch(e) {}
+  }
+  if (!feats.length) { toast('No building GeoJSON found!'); return; }
+
+  feats.forEach((f, i) => ingest(f, i));
+  renderList();
+  updateStats();
+}
+
+// ══════════════════════════════════════════════════════
+// INGEST ONE FEATURE
+// ══════════════════════════════════════════════════════
+function ingest(feature, i) {
+  const p    = feature.properties || {};
+  const src  = p.source || 'osm';
+  const col  = SRC_COLOR[src] || SRC_COLOR.osm;
+  const num  = buildings.length + 1;
+  const name = p.name || p.resolved_name || `Building ${num}`;
+
+  let layer;
+  try { layer = L.geoJSON(feature, { style:{ color:col, weight:1.5, fillColor:col, fillOpacity:.28 } }); }
+  catch(e){ return; }
+
+  let center;
+  try { center = layer.getBounds().getCenter(); }
+  catch(e){ return; }
+
+  // number marker
+  const marker = makeMarker(center, num, col);
+
+  const rec = { num, name, src, tags:{...p}, feature, layer, marker, center };
+  const idx = buildings.length;
+  buildings.push(rec);
+
+  layer.on('click',  () => select(idx));
+  marker.on('click', () => select(idx));
+
+  bldGroup.addLayer(layer);
+  marker.addTo(mrkGroup);
+}
+
+function makeMarker(ll, num, col) {
+  return L.marker(ll, { icon: L.divIcon({
+    className:'',
+    html:`<div style="background:${col};color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:Inter,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.6);border:1.5px solid rgba(255,255,255,.3)">${num}</div>`,
+    iconSize:[20,20],iconAnchor:[10,10]
+  })});
+}
+
+// ══════════════════════════════════════════════════════
+// SELECT + EDIT PANEL
+// ══════════════════════════════════════════════════════
+function select(idx) {
+  // deselect previous
+  if (selIdx !== null && buildings[selIdx]) {
+    const pb = buildings[selIdx];
+    pb.layer.setStyle({ fillOpacity:.28, weight:1.5, color: SRC_COLOR[pb.src]||SRC_COLOR.osm });
+  }
+  selIdx = idx;
+  const b = buildings[idx];
+  if (!b) return;
+
+  b.layer.setStyle({ fillOpacity:.6, weight:3, color:'#facc15' });
+  try { map.fitBounds(b.layer.getBounds(), { padding:[60,60] }); } catch(e){}
+
+  // populate edit panel
+  document.getElementById('ep-name').value = b.name || '';
+  document.getElementById('ep-type').value = b.tags?.building || 'yes';
+  document.getElementById('ep-ref').value  = b.tags?.ref || '';
+  document.getElementById('ep').classList.add('open');
+
+  // highlight list row
+  document.querySelectorAll('.bi').forEach(el => el.classList.remove('sel'));
+  const el = document.getElementById(`bi-${idx}`);
+  if (el) { el.classList.add('sel'); el.scrollIntoView({ block:'nearest', behavior:'smooth' }); }
+}
+
+function closeEP() {
+  if (selIdx !== null && buildings[selIdx]) {
+    const b = buildings[selIdx];
+    b.layer.setStyle({ fillOpacity:.28, weight:1.5, color: SRC_COLOR[b.src]||SRC_COLOR.osm });
+  }
+  selIdx = null;
+  document.getElementById('ep').classList.remove('open');
+  document.querySelectorAll('.bi').forEach(el => el.classList.remove('sel'));
+}
+
+function applyEdit() {
+  if (selIdx === null) return;
+  const b   = buildings[selIdx];
+  const nom = document.getElementById('ep-name').value.trim() || b.name;
+  b.name = nom;
+  b.tags.building = document.getElementById('ep-type').value;
+  const ref = document.getElementById('ep-ref').value.trim();
+  if (ref) b.tags.ref = ref; else delete b.tags.ref;
+  edits++; document.getElementById('s-ed').textContent = edits;
+  renderList(); updateStats();
+  toast(`Saved: "${nom}"`);
+  closeEP();
+}
+
+function deleteSel() {
+  if (selIdx === null) return;
+  const b = buildings[selIdx];
+  if (!confirm(`Delete "${b.name}"?`)) return;
+  bldGroup.removeLayer(b.layer);
+  mrkGroup.removeLayer(b.marker);
+  buildings.splice(selIdx, 1);
+  selIdx = null;
+  document.getElementById('ep').classList.remove('open');
+  edits++; document.getElementById('s-ed').textContent = edits;
+  renderList(); updateStats();
+  toast('Building deleted');
+}
+
+// ══════════════════════════════════════════════════════
+// BUILDING LIST
+// ══════════════════════════════════════════════════════
+function renderList(q = '') {
+  const c = document.getElementById('bld-list');
+  c.innerHTML = '';
+  buildings.forEach((b, idx) => {
+    if (q && !b.name.toLowerCase().includes(q)) return;
+    const col = SRC_COLOR[b.src] || SRC_COLOR.osm;
+    const div = document.createElement('div');
+    div.className = 'bi'; div.id = `bi-${idx}`;
+    div.innerHTML = `
+      <div class="bi-num" style="background:${col}">${b.num}</div>
+      <div class="bi-text">
+        <div class="bi-name">${b.name}</div>
+        <div class="bi-sub">#${b.num} · ${b.src}</div>
+      </div>`;
+    div.onclick = () => select(idx);
+    c.appendChild(div);
+  });
+}
+
+function filterList() {
+  renderList(document.getElementById('search').value.toLowerCase());
+}
+
+function updateStats() {
+  document.getElementById('s-tot').textContent = buildings.length;
+  document.getElementById('s-nam').textContent =
+    buildings.filter(b => !b.name.startsWith('Building ')).length;
+}
+
+// ══════════════════════════════════════════════════════
+// DRAW NEW POLYGON
+// ══════════════════════════════════════════════════════
+let drawHandler = null;
+function startDraw() {
+  finishEdit();
+  if (drawHandler) try { drawHandler.disable(); } catch(e) {}
+  drawHandler = new L.Draw.Polygon(map, {
+    shapeOptions: { color:'#10b981', fillOpacity:.3, weight:2 }
+  });
+  drawHandler.enable();
+  document.getElementById('t-draw').classList.add('on');
+  toast('Click to draw building outline · Double-click to finish');
+}
+
+map.on(L.Draw.Event.CREATED, e => {
+  document.getElementById('t-draw').classList.remove('on');
+  const lls  = e.layer.getLatLngs()[0];
+  const poly = lls.map(p => ({ lat:p.lat, lon:p.lng }));
+  const coords = poly.map(p => [p.lon, p.lat]);
+  if (JSON.stringify(coords[0]) !== JSON.stringify(coords[coords.length-1])) coords.push(coords[0]);
+
+  const feat = {
+    type:'Feature',
+    properties:{ name:'New Building', building:'yes', source:'new', building_idx: buildings.length+1 },
+    geometry:{ type:'Polygon', coordinates:[coords] }
+  };
+  ingest(feat, buildings.length);
+  renderList(); updateStats();
+  edits++; document.getElementById('s-ed').textContent = edits;
+  toast('New building added — click it to rename');
+  setTimeout(() => select(buildings.length - 1), 150);
+});
+
+// ══════════════════════════════════════════════════════
+// EDIT EXISTING POLYGON SHAPES
+// ══════════════════════════════════════════════════════
+function startEdit() {
+  if (editActive) return;
+  editActive = true;
+  editCtrl = new L.EditToolbar.Edit(map, { featureGroup: bldGroup });
+  editCtrl.enable();
+  document.getElementById('t-edit').style.display = 'none';
+  document.getElementById('t-done').style.display = '';
+  document.getElementById('em-bar').style.display  = 'block';
+  toast('Drag any vertex to reshape · Click Done when finished');
+}
+
+function finishEdit() {
+  if (!editActive) return;
+  editActive = false;
+  if (editCtrl) { editCtrl.save(); editCtrl.disable(); editCtrl = null; }
+  document.getElementById('t-edit').style.display = '';
+  document.getElementById('t-done').style.display = 'none';
+  document.getElementById('em-bar').style.display  = 'none';
+  edits++; document.getElementById('s-ed').textContent = edits;
+  toast('Polygon edits saved');
+}
+
+// ══════════════════════════════════════════════════════
+// EXPORT GEOJSON
+// ══════════════════════════════════════════════════════
+function exportGeoJSON() {
+  const features = buildings.map(b => {
+    let coords = [];
+    try {
+      b.layer.eachLayer(l => {
+        const ll = l.getLatLngs ? l.getLatLngs()[0] : [];
+        if (ll.length) coords = ll.map(p => [p.lng, p.lat]);
+      });
+    } catch(e) {}
+    if (!coords.length) coords = (b.feature?.geometry?.coordinates[0]) || [];
+    if (coords.length && JSON.stringify(coords[0]) !== JSON.stringify(coords[coords.length-1])) coords.push(coords[0]);
+    return {
+      type:'Feature',
+      properties:{ building_id: String(b.tags.osm_id||b.tags.building_id||b.num), building_idx:b.num, name:b.name, source:b.src, building:b.tags?.building||'yes' },
+      geometry:{ type:'Polygon', coordinates:[coords] }
+    };
+  });
+  const blob = new Blob([JSON.stringify({ type:'FeatureCollection', features }, null, 2)], { type:'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'nitt_buildings_edited.geojson'; a.click();
+  toast(`Exported ${features.length} buildings`);
+}
+
+// ══════════════════════════════════════════════════════
+// POINT-IN-POLYGON TEST (JS ray-casting)
+// ══════════════════════════════════════════════════════
+function rayCast(lat, lon, ring) {
+  let inside = false; const n = ring.length;
+  for (let i=0,j=n-1;i<n;j=i++) {
+    const [xi,yi]=ring[i],[xj,yj]=ring[j];
+    if (yi===yj) continue;
+    if (((yi>lat)!==(yj>lat)) && lon<((xj-xi)*(lat-yi)/(yj-yi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+
+function runPiP() {
+  const lat = parseFloat(document.getElementById('pip-lat').value);
+  const lon = parseFloat(document.getElementById('pip-lon').value);
+  if (isNaN(lat)||isNaN(lon)) { toast('Enter valid coordinates'); return; }
+
+  if (testPin) map.removeLayer(testPin);
+  testPin = L.circleMarker([lat,lon],{ radius:8, color:'#f59e0b', fillColor:'#f59e0b', fillOpacity:.9, weight:2 }).addTo(map);
+
+  let hit = null;
+  for (const b of buildings) {
+    const geom = b.feature?.geometry;
+    if (!geom||geom.type!=='Polygon') continue;
+    if (rayCast(lat, lon, geom.coordinates[0])) { hit = b; break; }
+  }
+
+  const res = document.getElementById('pip-res');
+  res.style.display = 'block';
+  if (hit) {
+    res.className = 'hit';
+    res.innerHTML = `<b>${hit.num}. ${hit.name}</b><br><small>${hit.src}</small>`;
+    try { map.fitBounds(hit.layer.getBounds(),{padding:[60,60]}); } catch(e){}
+    select(buildings.indexOf(hit));
+  } else {
+    res.className = 'miss';
+    res.innerHTML = '<b>Not inside any building</b>';
+  }
+}
+
+map.on('click', e => {
+  document.getElementById('pip-lat').value = e.latlng.lat.toFixed(6);
+  document.getElementById('pip-lon').value = e.latlng.lng.toFixed(6);
+});
+
+// ══════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════
+let _tt;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(_tt); _tt = setTimeout(() => t.style.display='none', 3200);
+}
+
+// ══════════════════════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════════════════════
+load();
+</script>
+</body>
+</html>

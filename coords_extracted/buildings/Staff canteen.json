@@ -1,0 +1,36 @@
+{
+    "osm_id": 486024382,
+    "name": "Staff canteen",
+    "centroid": {
+        "lat": 10.759383320000001,
+        "lon": 78.81229544
+    },
+    "polygon": [
+        {
+            "lat": 10.7594612,
+            "lon": 78.8122556
+        },
+        {
+            "lat": 10.7594632,
+            "lon": 78.8123511
+        },
+        {
+            "lat": 10.7592635,
+            "lon": 78.8123552
+        },
+        {
+            "lat": 10.7592675,
+            "lon": 78.8122597
+        },
+        {
+            "lat": 10.7594612,
+            "lon": 78.8122556
+        }
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "regional",
+        "name": "Staff canteen"
+    }
+}

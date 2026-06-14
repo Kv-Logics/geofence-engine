@@ -1,0 +1,198 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 4772978039,
+        "amenity": "university",
+        "name": "Jasper hostel NIT Trichy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.8183653,
+          10.769399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 100857261,
+        "addr:city": "Tiruchirapalli",
+        "addr:country": "IN",
+        "addr:housename": "National Institute of Technology",
+        "addr:postcode": "620015",
+        "addr:street": "13th Street",
+        "alt_name": "NIT Tiruchirappalli;NIT Trichy;National Institute of Technology Tiruchirappalli",
+        "amenity": "university",
+        "name": "National Institute of Technology Trichy",
+        "name:ar": "\u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0648\u0637\u0646\u064a \u0644\u0644\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u062a\u0631\u064a\u0634\u064a",
+        "name:hi": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u0940\u092f \u092a\u094d\u0930\u094c\u0926\u094d\u092f\u094b\u0917\u093f\u0915\u0940 \u0938\u0902\u0938\u094d\u0925\u093e\u0928, \u0924\u094d\u0930\u093f\u091a\u0940",
+        "name:ml": "\u0d28\u0d3e\u0d37\u0d23\u0d7d \u0d07\u0d7b\u0d38\u0d4d\u0d31\u0d4d\u0d31\u0d3f\u0d31\u0d4d\u0d31\u0d4d\u0d2f\u0d42\u0d1f\u0d4d\u0d1f\u0d4d \u0d13\u0d2b\u0d4d \u0d1f\u0d46\u0d15\u0d4d\u0d28\u0d4b\u0d33\u0d1c\u0d3f, \u0d1f\u0d4d\u0d30\u0d3f\u0d1a\u0d4d\u0d1a\u0d3f",
+        "name:mr": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u0940\u092f \u0924\u0902\u0924\u094d\u0930\u091c\u094d\u091e\u093e\u0928 \u0938\u0902\u0938\u094d\u0925\u093e, \u0924\u093f\u0930\u0941\u091a\u093f\u0930\u093e\u092a\u0932\u094d\u0932\u0940",
+        "name:ta": "\u0ba4\u0bc7\u0b9a\u0bbf\u0baf \u0ba4\u0bca\u0bb4\u0bbf\u0bb2\u0bcd\u0ba8\u0bc1\u0b9f\u0bcd\u0baa\u0b95\u0bcd \u0b95\u0bb4\u0b95\u0bae\u0bcd, \u0ba4\u0bbf\u0bb0\u0bc1\u0b9a\u0bcd\u0b9a\u0bbf",
+        "short_name": "NITT",
+        "website": "https://www.nitt.edu/",
+        "wikidata": "Q3521821",
+        "wikipedia": "en:National Institute of Technology, Tiruchirappalli"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              78.8053598,
+              10.763666
+            ],
+            [
+              78.807347,
+              10.7612979
+            ],
+            [
+              78.8086388,
+              10.7600133
+            ],
+            [
+              78.810064,
+              10.7589581
+            ],
+            [
+              78.8112225,
+              10.7580787
+            ],
+            [
+              78.8119629,
+              10.7575679
+            ],
+            [
+              78.8127349,
+              10.7571655
+            ],
+            [
+              78.813229,
+              10.7568727
+            ],
+            [
+              78.8156994,
+              10.7555905
+            ],
+            [
+              78.8173996,
+              10.7547261
+            ],
+            [
+              78.818868,
+              10.7540632
+            ],
+            [
+              78.8260312,
+              10.751714
+            ],
+            [
+              78.8266969,
+              10.7559094
+            ],
+            [
+              78.8246711,
+              10.7629959
+            ],
+            [
+              78.824613,
+              10.7631047
+            ],
+            [
+              78.8222254,
+              10.7675741
+            ],
+            [
+              78.8204561,
+              10.7729137
+            ],
+            [
+              78.8179952,
+              10.7731079
+            ],
+            [
+              78.8169095,
+              10.7749224
+            ],
+            [
+              78.81675,
+              10.7749328
+            ],
+            [
+              78.8138687,
+              10.7751656
+            ],
+            [
+              78.8123159,
+              10.7701651
+            ],
+            [
+              78.8122892,
+              10.7686944
+            ],
+            [
+              78.8118212,
+              10.7687813
+            ],
+            [
+              78.8114457,
+              10.7689078
+            ],
+            [
+              78.8114457,
+              10.7686654
+            ],
+            [
+              78.8113062,
+              10.7684862
+            ],
+            [
+              78.8117032,
+              10.767896
+            ],
+            [
+              78.8119392,
+              10.7667155
+            ],
+            [
+              78.8084523,
+              10.7674164
+            ],
+            [
+              78.8083021,
+              10.7669316
+            ],
+            [
+              78.8076369,
+              10.7671529
+            ],
+            [
+              78.8073043,
+              10.7664256
+            ],
+            [
+              78.8066606,
+              10.76651
+            ],
+            [
+              78.8066392,
+              10.7663202
+            ],
+            [
+              78.8041608,
+              10.7643598
+            ],
+            [
+              78.8053598,
+              10.763666
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

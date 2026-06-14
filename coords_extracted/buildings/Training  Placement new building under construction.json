@@ -1,0 +1,35 @@
+{
+    "osm_id": 486024640,
+    "name": "Training & Placement new building under construction",
+    "centroid": {
+        "lat": 10.76004576,
+        "lon": 78.81377368
+    },
+    "polygon": [
+        {
+            "lat": 10.7601784,
+            "lon": 78.813571
+        },
+        {
+            "lat": 10.7601852,
+            "lon": 78.814073
+        },
+        {
+            "lat": 10.7598457,
+            "lon": 78.8140824
+        },
+        {
+            "lat": 10.7598411,
+            "lon": 78.813571
+        },
+        {
+            "lat": 10.7601784,
+            "lon": 78.813571
+        }
+    ],
+    "tags": {
+        "building": "yes",
+        "name": "Training & Placement new building under construction",
+        "office": "educational_institution"
+    }
+}

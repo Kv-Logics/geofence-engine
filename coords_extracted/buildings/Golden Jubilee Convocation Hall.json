@@ -1,0 +1,35 @@
+{
+    "osm_id": 588837186,
+    "name": "Golden Jubilee Convocation Hall",
+    "centroid": {
+        "lat": 10.761496939999999,
+        "lon": 78.81098404000001
+    },
+    "polygon": [
+        {
+            "lat": 10.7617181,
+            "lon": 78.8105541
+        },
+        {
+            "lat": 10.7617412,
+            "lon": 78.8116016
+        },
+        {
+            "lat": 10.7611498,
+            "lon": 78.8116329
+        },
+        {
+            "lat": 10.7611575,
+            "lon": 78.8105775
+        },
+        {
+            "lat": 10.7617181,
+            "lon": 78.8105541
+        }
+    ],
+    "tags": {
+        "building": "yes",
+        "building:levels": "0",
+        "name": "Golden Jubilee Convocation Hall"
+    }
+}
