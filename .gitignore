@@ -15,8 +15,8 @@ venv/
 *.ipynb
 
 # Large raw data (keep processed outputs)
-coords_extracted/raw_osm.json
-coords_extracted/raw_osm_v2.json
+data/raw_osm.json
+data/raw_osm_v2.json
 
 # OS
 .DS_Store
