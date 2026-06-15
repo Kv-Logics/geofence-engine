@@ -30,7 +30,8 @@ QUERY = f"""
 out body geom qt;
 """
 
-OUT_DIR = "coords_extracted"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 raw_path = os.path.join(OUT_DIR, "raw_osm_v2.json")
 

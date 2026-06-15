@@ -15,7 +15,8 @@ import urllib.request
 import time
 
 # ─── Config ────────────────────────────────────────────────────────────────
-COORDS_DIR = "coords_extracted"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+COORDS_DIR = os.path.join(BASE_DIR, "data")
 OSM_RAW_V2  = os.path.join(COORDS_DIR, "raw_osm_v2.json")
 OSM_RAW_V1  = os.path.join(COORDS_DIR, "raw_osm.json")   # fallback
 MSFT_PATH   = os.path.join(COORDS_DIR, "microsoft_footprints.json")

@@ -279,21 +279,21 @@ const SRC_COLOR = { osm:'#f97316', microsoft_ml:'#3b82f6', manual:'#10b981', new
 async function load() {
   // boundary ring
   try {
-    const d = await (await fetch('coords_extracted/campus_boundary.geojson')).json();
+    const d = await (await fetch('../data/campus_boundary.geojson')).json();
     L.geoJSON(d, { style:{ color:'#22d3ee', weight:2, fillOpacity:.04, dashArray:'6 3' } }).addTo(map);
   } catch(e) {}
 
   // roads
   try {
-    const d = await (await fetch('coords_extracted/roads.geojson')).json();
+    const d = await (await fetch('../data/roads.geojson')).json();
     L.geoJSON(d, { style:{ color:'#334155', weight:1.5, opacity:.7 } }).addTo(map);
   } catch(e) {}
 
   // buildings
   let feats = [];
   const urls = [
-    'coords_extracted/master_buildings.geojson',
-    'coords_extracted/buildings.geojson'
+    '../data/master_buildings.geojson',
+    '../data/buildings.geojson'
   ];
   for (const u of urls) {
     try { feats = (await (await fetch(u)).json()).features; toast(`Loaded ${feats.length} buildings`); break; }

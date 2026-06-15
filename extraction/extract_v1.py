@@ -22,7 +22,8 @@ QUERY = f"""
 out tags geom;
 """
 
-OUT_DIR = "coords_extracted"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT_DIR = os.path.join(BASE_DIR, "data")
 BUILDINGS_DIR = os.path.join(OUT_DIR, "buildings")
 
 os.makedirs(OUT_DIR, exist_ok=True)

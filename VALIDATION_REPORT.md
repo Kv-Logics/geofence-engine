@@ -135,18 +135,19 @@ The `GeofenceEngine` class adds a **20×20 spatial grid index** over the campus,
 
 | File | Purpose |
 |---|---|
-| `extract_v2.py` | Download raw OSM data via Overpass API |
-| `merge_pipeline.py` | Merge sources, reverse-geocode, deduplicate |
-| `fix_winding.py` | Normalize all polygon winding orders |
-| `export_formats.py` | Export `.geojson`, `.kml`, `attendance_zones.geojson` |
-| `spatial_engine_v2.py` | Production geofence engine (grid-indexed PiP) |
-| `validate_raycasting.py` | Interior-point + speed validation |
-| `test_raycasting.py` | Unit tests for algorithm correctness |
-| `map.html` | Interactive map — satellite, draw, rename, test PiP |
-| `usage.py` | Integration examples for attendance system |
-| `coords_extracted/master_buildings.geojson` | Final 306-building dataset |
-| `coords_extracted/attendance_zones.geojson` | Slim polygon-only file for engine |
-| `coords_extracted/campus.kml` | Google Earth import |
+| `run.py` | Unified command-line interface for the system |
+| `extraction/extract_v2.py` | Download raw OSM data via Overpass API |
+| `pipeline/merge_pipeline.py` | Merge sources, reverse-geocode, deduplicate |
+| `pipeline/fix_winding.py` | Normalize all polygon winding orders |
+| `pipeline/export_formats.py` | Export `.geojson`, `.kml`, `attendance_zones.geojson` |
+| `engine/spatial_engine.py` | Production geofence engine (grid-indexed PiP) |
+| `tests/validate_raycasting.py` | Interior-point + speed validation |
+| `tests/test_raycasting.py` | Unit tests for algorithm correctness |
+| `map/map.html` | Interactive map — satellite, draw, rename, test PiP |
+| `tests/usage.py` | Integration examples for attendance system |
+| `data/master_buildings.geojson` | Final 306-building dataset |
+| `data/attendance_zones.geojson` | Slim polygon-only file for engine |
+| `data/campus.kml` | Google Earth import |
 
 ---
 

@@ -9,7 +9,8 @@ import urllib.request
 import gzip
 import os
 
-OUT_DIR = "coords_extracted"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # NITT campus bounding box

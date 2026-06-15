@@ -1,8 +1,9 @@
 import json
 import os
 
-buildings_geojson_path = os.path.join("coords_extracted", "buildings.geojson")
-output_path = os.path.join("coords_extracted", "attendance_polygons.json")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+buildings_geojson_path = os.path.join(BASE_DIR, "data", "buildings.geojson")
+output_path = os.path.join(BASE_DIR, "data", "attendance_polygons.json")
 
 print(f"Reading from {buildings_geojson_path}...")
 

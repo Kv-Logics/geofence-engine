@@ -15,9 +15,10 @@ import json
 import os
 import time
 
-# ── Bootstrap: make sure master_buildings exists ──────────────────────────
-MASTER = os.path.join("coords_extracted", "master_buildings.json")
-GEOJSON = os.path.join("coords_extracted", "master_buildings.geojson")
+# Resolve paths dynamically relative to the script location
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MASTER = os.path.join(BASE_DIR, "data", "master_buildings.json")
+GEOJSON = os.path.join(BASE_DIR, "data", "master_buildings.geojson")
 
 # If master_buildings.json doesn't exist yet, build it from GeoJSON
 if not os.path.exists(MASTER) and os.path.exists(GEOJSON):
@@ -47,7 +48,10 @@ if not os.path.exists(MASTER) and os.path.exists(GEOJSON):
     print(f"  Created {MASTER} with {len(buildings)} buildings.\n")
 
 # ── Import Engine ─────────────────────────────────────────────────────────
-from spatial_engine_v2 import GeofenceEngine
+# Add parent directory of tests/ (repository root) to system path to import engine.spatial_engine
+import sys
+sys.path.append(BASE_DIR)
+from engine.spatial_engine import GeofenceEngine
 
 print("=" * 60)
 print("  NITT Geofence Engine — Usage Demo")
@@ -60,9 +64,9 @@ print(f"\nEngine ready. Stats: {stats}\n")
 # ─────────────────────────────────────────────────────────────────────────
 # USE CASE 1: Single GPS lookup (what your attendance system calls)
 # ─────────────────────────────────────────────────────────────────────────
-print("─" * 60)
-print("USE CASE 1: Faculty GPS Ping → Which building?")
-print("─" * 60)
+print("-" * 60)
+print("USE CASE 1: Faculty GPS Ping -> Which building?")
+print("-" * 60)
 
 # Simulate a faculty member's GPS coordinate
 sample_points = [
@@ -79,16 +83,16 @@ for lat, lon, label in sample_points:
 
     if result:
         name = result.get('resolved_name') or result.get('name') or result['building_id']
-        print(f"  {label:<18} → [{name}]  ({elapsed_us:.1f} µs)")
+        print(f"  {label:<18} -> [{name}]  ({elapsed_us:.1f} us)")
     else:
-        print(f"  {label:<18} → [Not inside any building]  ({elapsed_us:.1f} µs)")
+        print(f"  {label:<18} -> [Not inside any building]  ({elapsed_us:.1f} us)")
 
 # ─────────────────────────────────────────────────────────────────────────
 # USE CASE 2: Batch attendance verification
 # ─────────────────────────────────────────────────────────────────────────
-print(f"\n{'─'*60}")
+print(f"\n{'-'*60}")
 print("USE CASE 2: Batch Attendance — Check all faculty")
-print("─" * 60)
+print("-" * 60)
 
 # Simulate faculty records with GPS pings
 faculty_gps = [
@@ -109,18 +113,18 @@ for faculty in faculty_gps:
         "building_id": building['building_id'] if building else None,
     }
     attendance.append(record)
-    status_icon = "✓" if building else "✗"
+    status_icon = "+" if building else "-"
     loc = record['location'] or "off campus"
-    print(f"  {status_icon} {faculty['name']:<20} {record['status']:<8} @ {loc}")
+    print(f"  [{status_icon}] {faculty['name']:<20} {record['status']:<8} @ {loc}")
 
 print(f"\n  Present: {sum(1 for r in attendance if r['status']=='PRESENT')}/{len(attendance)}")
 
 # ─────────────────────────────────────────────────────────────────────────
 # USE CASE 3: Building directory lookup
 # ─────────────────────────────────────────────────────────────────────────
-print(f"\n{'─'*60}")
+print(f"\n{'-'*60}")
 print("USE CASE 3: Building Directory (first 15 named)")
-print("─" * 60)
+print("-" * 60)
 
 named = [b for b in engine.all_buildings() if b.get('resolved_name') or b.get('name')][:15]
 for b in named:
@@ -132,9 +136,9 @@ for b in named:
 # ─────────────────────────────────────────────────────────────────────────
 # USE CASE 4: Export attendance_zones.geojson for mobile/Unity
 # ─────────────────────────────────────────────────────────────────────────
-print(f"\n{'─'*60}")
+print(f"\n{'-'*60}")
 print("USE CASE 4: Generate attendance_zones.geojson")
-print("─" * 60)
+print("-" * 60)
 
 zones_features = []
 for b in engine.all_buildings():
@@ -151,10 +155,10 @@ for b in engine.all_buildings():
         "geometry": {"type": "Polygon", "coordinates": [coords]}
     })
 
-out_path = os.path.join("coords_extracted", "attendance_zones.geojson")
+out_path = os.path.join(BASE_DIR, "data", "attendance_zones.geojson")
 with open(out_path, 'w', encoding='utf-8') as f:
     json.dump({"type": "FeatureCollection", "features": zones_features}, f, indent=2)
-print(f"  ✓ Written {len(zones_features)} zones to {out_path}")
+print(f"  [SUCCESS] Written {len(zones_features)} zones to {out_path}")
 print(f"  Open in: QGIS | ArcGIS | Google Earth Pro | Mapbox Studio")
 print()
 print("=" * 60)

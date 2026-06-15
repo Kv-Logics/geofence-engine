@@ -14,7 +14,8 @@ import json
 import os
 import time
 
-SRC = os.path.join("coords_extracted", "master_buildings.geojson")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(BASE_DIR, "data", "master_buildings.geojson")
 with open(SRC, encoding="utf-8") as f:
     gj = json.load(f)
 

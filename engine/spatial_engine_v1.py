@@ -81,7 +81,8 @@ class GeofenceEngine:
 
 if __name__ == "__main__":
     # Simple test using the extracted polygons
-    engine = GeofenceEngine(os.path.join("coords_extracted", "attendance_polygons.json"))
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    engine = GeofenceEngine(os.path.join(base_dir, "data", "attendance_polygons.json"))
     print(f"Loaded {len(engine.buildings)} buildings into the spatial engine.")
     
     # Just an arbitrary point within NITT bounding box (might not hit a building)

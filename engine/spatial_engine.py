@@ -7,7 +7,8 @@ import json
 import os
 import math
 
-MASTER_PATH = os.path.join("coords_extracted", "master_buildings.json")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MASTER_PATH = os.path.join(BASE_DIR, "data", "master_buildings.json")
 
 class GeofenceEngine:
     """

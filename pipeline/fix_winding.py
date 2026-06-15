@@ -13,8 +13,9 @@ This script:
 import json
 import os
 
-SRC  = os.path.join("coords_extracted", "master_buildings.geojson")
-DEST = os.path.join("coords_extracted", "master_buildings.geojson")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC  = os.path.join(BASE_DIR, "data", "master_buildings.geojson")
+DEST = os.path.join(BASE_DIR, "data", "master_buildings.geojson")
 
 # ── Helpers ────────────────────────────────────────────────────────────
 

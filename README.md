@@ -33,27 +33,51 @@ GPS Ping (lat, lon)
 
 ```
 geofence-engine/
-├── extract_v2.py              ← OSM Overpass extraction (expanded bbox)
-├── merge_pipeline.py          ← Merge, deduplicate, reverse-geocode
-├── fix_winding.py             ← Auto-fix polygon winding order
-├── export_formats.py          ← Export .geojson / .kml / attendance zones
-├── spatial_engine_v2.py       ← Grid-indexed PiP engine (production)
-├── spatial_engine.py          ← Linear scan PiP engine (reference)
-├── validate_raycasting.py     ← Interior-point + speed benchmark
-├── test_raycasting.py         ← Unit tests
-├── usage.py                   ← Attendance system integration examples
-├── map.html                   ← Interactive map (satellite, edit, test)
-├── run_map.bat                ← One-click local server launcher
-├── VALIDATION_REPORT.md       ← Full algorithm validation report
-└── coords_extracted/
-    ├── master_buildings.geojson     ← 306 buildings (primary dataset)
-    ├── attendance_zones.geojson     ← Slim polygons for engine
-    ├── campus_boundary.geojson      ← Campus perimeter
-    ├── buildings.geojson            ← Raw OSM buildings
-    ├── roads.geojson                ← Campus road network
-    ├── campus.kml                   ← Google Earth format
-    ├── raw_osm.json                 ← Raw Overpass response
-    └── raw_osm_v2.json              ← Expanded Overpass response
+├── README.md
+├── VALIDATION_REPORT.md
+├── .gitignore
+├── run.py                        ← Unified orchestration CLI
+│
+├── extraction/                   ← OSM & Microsoft data extraction
+│   ├── __init__.py
+│   ├── extract_v1.py             ← OSM extractor (reference)
+│   ├── extract_v2.py             ← OSM extractor (production)
+│   ├── download_microsoft.py     ← MSFT footprint downloader
+│   └── extract_polygons.py       ← Polygon extractor
+│
+├── pipeline/                     ← Data processing pipeline
+│   ├── __init__.py
+│   ├── merge_pipeline.py         ← Merges sources, deduplicates, geocodes
+│   ├── fix_winding.py            ← Normalizes winding orders
+│   └── export_formats.py         ← Exports to GIS formats (KML/GeoJSON)
+│
+├── engine/                       ← Core geofencing engines
+│   ├── __init__.py
+│   ├── spatial_engine.py         ← Grid-indexed PiP engine (production)
+│   └── spatial_engine_v1.py      ← Linear scan PiP engine (reference)
+│
+├── tests/                        ← Testing & verification
+│   ├── __init__.py
+│   ├── test_raycasting.py        ← Centroid-in-polygon unit test
+│   ├── validate_raycasting.py    ← Scanline interior point benchmark
+│   ├── usage.py                  ← Integration demo
+│   ├── verify.py                 ← Dataset file size validator
+│   └── ray_casting_test.py       ← Local geofencing test
+│
+├── map/                          ← Visualization map
+│   ├── map.html                  ← Interactive Leaflet-based editor
+│   └── run_map.bat               ← Quick visualization runner
+│
+└── data/                         ← Processed & raw geospatial datasets
+    ├── master_buildings.json     ← Production engine JSON dataset
+    ├── master_buildings.geojson  ← Production map GeoJSON dataset
+    ├── attendance_zones.geojson  ← Minimal geofencing GeoJSON
+    ├── campus_boundary.geojson   ← Campus boundary perimeter
+    ├── buildings.geojson         ← Extracted raw buildings
+    ├── roads.geojson             ← Campus road network
+    ├── campus.kml                ← Google Earth format
+    ├── raw_osm.json              ← Ignored raw OSM JSON
+    └── raw_osm_v2.json           ← Ignored expanded OSM JSON
 ```
 
 ---
@@ -75,10 +99,9 @@ geofence-engine/
 ### 1. View the Interactive Map
 
 ```bash
-# Double-click run_map.bat  OR manually:
-cd "geofence-engine"
-python -m http.server 8000
-# Open: http://localhost:8000/map.html
+# Start map server using the CLI:
+python run.py map --port 8000
+# (Opens http://localhost:8000/map/map.html automatically in your browser)
 ```
 
 The map loads on **real Esri satellite imagery** with:
@@ -92,31 +115,38 @@ The map loads on **real Esri satellite imagery** with:
 ### 2. Geofence Lookup (Python)
 
 ```python
-from spatial_engine_v2 import GeofenceEngine
+import sys
+# Make sure the project root is in the path to import engine module
+sys.path.append(".")
+from engine.spatial_engine import GeofenceEngine
 
-engine = GeofenceEngine("coords_extracted/master_buildings.json")
+engine = GeofenceEngine("data/master_buildings.json")
 
 # Single GPS lookup
 result = engine.lookup(lat=10.7621, lon=78.8137)
 
 if result:
-    print(f"Inside: {result['name']}  (ID: {result['building_id']})")
+    name = result.get('resolved_name') or result.get('name') or result['building_id']
+    print(f"Inside: {name}  (ID: {result['building_id']})")
 else:
     print("Not inside any registered building")
 ```
 
-### 3. Re-Extract Campus Data
+### 3. Re-Extract Campus Data & Process
 
 ```bash
-python extract_v2.py          # Download latest OSM data
-python fix_winding.py         # Fix polygon winding order
-python export_formats.py      # Generate all output formats
+# Download raw OSM data, Microsoft footprints, merge them, process format exports and fix winding orders:
+python run.py pipeline --all
 ```
 
-### 4. Run Validation
+### 4. Run Specific Stages / Validation
 
 ```bash
-python validate_raycasting.py
+# Run only test suite
+python run.py pipeline --test
+
+# Run only OSM raw extraction
+python run.py pipeline --extract
 ```
 
 ---
@@ -142,7 +172,7 @@ def ray_cast(lon, lat, ring):
 
 ### Grid-Indexed Spatial Engine
 
-The `GeofenceEngine` in `spatial_engine_v2.py` divides the campus into a **20×20 grid**. Each lookup queries only the ~8 buildings in the relevant cell instead of all 306 — a **~38× speedup**.
+The `GeofenceEngine` in `engine/spatial_engine.py` divides the campus into a **20×20 grid**. Each lookup queries only the ~8 buildings in the relevant cell instead of all 306 — a **~38× speedup**.
 
 ```
 Campus bbox → 20×20 grid cells
@@ -178,9 +208,11 @@ GPS query → cell lookup → ~8 candidates → ray-cast
 ## Integration Example — Attendance System
 
 ```python
-from spatial_engine_v2 import GeofenceEngine
+import sys
+sys.path.append(".")
+from engine.spatial_engine import GeofenceEngine
 
-engine = GeofenceEngine("coords_extracted/master_buildings.json")
+engine = GeofenceEngine("data/master_buildings.json")
 
 # Batch attendance check
 faculty_pings = [

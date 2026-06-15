@@ -1,4 +1,4 @@
-﻿"""
+"""
 Export campus map data into industry-standard GIS formats:
   - master_buildings.geojson  (Leaflet, QGIS, ArcGIS, Mapbox)
   - campus.kml                (Google Earth, Google Maps import)
@@ -13,7 +13,8 @@ import os
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
-COORDS_DIR = "coords_extracted"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+COORDS_DIR = os.path.join(BASE_DIR, "data")
 RAW_OSM = os.path.join(COORDS_DIR, "raw_osm_v2.json")
 if not os.path.exists(RAW_OSM):
     RAW_OSM = os.path.join(COORDS_DIR, "raw_osm.json")

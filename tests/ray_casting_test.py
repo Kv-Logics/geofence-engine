@@ -45,7 +45,10 @@ def haversine(lat1, lon1, lat2, lon2):
 # ------------------------------------
 # LOAD BUILDING POLYGON
 # ------------------------------------
-with open("administrative block.json", "r") as f:
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+admin_block_path = os.path.join(BASE_DIR, "data", "buildings", "Administrative block.json")
+with open(admin_block_path, "r", encoding="utf-8") as f:
     data = json.load(f)
 
 coords = data["features"][0]["geometry"]["coordinates"][0]

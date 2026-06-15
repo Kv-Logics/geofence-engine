@@ -9,9 +9,10 @@ import json
 import os
 import time
 
-GEOJSON = os.path.join("coords_extracted", "master_buildings.geojson")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+GEOJSON = os.path.join(BASE_DIR, "data", "master_buildings.geojson")
 if not os.path.exists(GEOJSON):
-    GEOJSON = os.path.join("coords_extracted", "buildings.geojson")
+    GEOJSON = os.path.join(BASE_DIR, "data", "buildings.geojson")
 
 # ── Ray-Casting Algorithm ───────────────────────────────────────────────
 def ray_cast(lat, lon, ring):
